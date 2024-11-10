@@ -8,8 +8,17 @@ namespace Quiz
 {
     public class Backend
     {
+        public Backend()
+        {
+            AktualnaKategoria = 100;
+            UtworzBazePytan();
+        }
+
+       
         public List<Pytanie> BazaPytan { get; set; }
         public int AktualnaKategoria { get; set; }
+        public Pytanie AktualnePytanie { get; set; }
+
 
         public void UtworzBazePytan()
         {
@@ -18,32 +27,50 @@ namespace Quiz
             p1.Id = 1;
             p1.Kategoria = 100;
             p1.Tresc = "Jak miał na imię Einstein?";
-            p1.Odpowiedz_1 = "Albert";
-            p1.Odpowiedz_2 = "Aaron";
-            p1.Odpowiedz_3 = "Anthony";
-            p1.Odpowiedz_4 = "Aragon";
-            BazaPytan.Add(p1);
+            p1.Odpowiedzi = new List<Odpowiedz>();
+            var o1 = new Odpowiedz();
+            o1.Numer = 1;
+            o1.Tresc = "Albert";
+            o1.CzyPoprawna = true;
+            p1.Odpowiedzi.Add(o1);
 
-            Pytanie p2 = new Pytanie();
-            p2.Id = 2;
-            p2.Kategoria = 200;
-            p2.Tresc = "W którym roku wybuchła I wojna światowa?";
-            p2.Odpowiedz_1 = "1914";
-            p2.Odpowiedz_2 = "1918";
-            p2.Odpowiedz_3 = "1945";
-            p2.Odpowiedz_4 = "2014";
-            BazaPytan.Add(p2);
 
-            Pytanie p3 = new Pytanie();
-            p3.Id = 3;
-            p3.Kategoria = 300;
-            p3.Tresc = "Jaki jest symbol chemiczny żelaza?";
-            p3.Odpowiedz_1 = "Fe";
-            p3.Odpowiedz_2 = "H";
-            p3.Odpowiedz_3 = "Ca";
-            p3.Odpowiedz_4 = "P";
-            BazaPytan.Add(p3);
+            var o2 = new Odpowiedz();
+            o2.Numer = 2;
+            o2.Tresc = "Aaron";
+            p1.Odpowiedzi.Add(o2);
+
+            var o3 = new Odpowiedz();
+            o3.Numer = 3;
+            o3.Tresc = "Andrew";
+            p1.Odpowiedzi.Add(o3);
+
+            var o4 = new Odpowiedz();
+            o4.Numer = 4;
+            o4.Tresc = "Leszek";
+            p1.Odpowiedzi.Add(o4);
+
+            BazaPytan.Add(p1);    
         }
 
+        public void WylosujPytanie()
+        {
+            // symulujemy losowanie
+            AktualnePytanie = BazaPytan[0];
+        }
+
+        public bool SprawdzPoprawnoscOdpowiedzi(int odpowiedzGracza)
+        {
+            var wybranaOdpowiedz = AktualnePytanie.Odpowiedzi
+                .FirstOrDefault(x => x.Numer == odpowiedzGracza);
+
+            if (wybranaOdpowiedz != null)
+            {
+                return wybranaOdpowiedz.CzyPoprawna;
+            }
+            else
+                return false;
+                
+        }
     }
 }
