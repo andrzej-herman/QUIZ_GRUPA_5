@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Quiz.Data;
 namespace Quiz
 {
-    public static class Frontend
+    public static class Display
     {
         private static List<string> dopusczalneKlawisze = ["1", "2", "3", "4"];
-
 
         public static void PokazEkranPowitalny()
         {
@@ -27,7 +21,7 @@ namespace Quiz
             Console.ReadLine();
         }
 
-        public static int WyswietlPytanieIPobierzOdpowiedzGracza(Pytanie pytanie)
+        public static int WyswietlPytanieIPobierzOdpowiedzGracza(Question pytanie)
         {
             var nacisnietyKlawisz = WyswietlPytanie(pytanie);
             while(!CzyGraczNacisnalWlasciwyKlawisz(nacisnietyKlawisz))
@@ -74,17 +68,17 @@ namespace Quiz
             Console.WriteLine(" GRATULACJE !!!");
         }
 
-        private static string? WyswietlPytanie(Pytanie pytanie)
+        private static string? WyswietlPytanie(Question pytanie)
         {
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine($" Pytanie za {pytanie.Kategoria} pkt.");
+            Console.WriteLine($" Pytanie za {pytanie.Category} pkt.");
             Console.WriteLine();
-            Console.WriteLine($" {pytanie.Tresc}");
+            Console.WriteLine($" {pytanie.Content}");
             Console.WriteLine();
-            foreach (var odpowiedz in pytanie.Odpowiedzi)
+            foreach (var odpowiedz in pytanie.Answers!)
             {
-                Console.WriteLine($" {odpowiedz.Id}. {odpowiedz.Tresc}");
+                Console.WriteLine($" {odpowiedz.Id}. {odpowiedz.Content}");
             }
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
