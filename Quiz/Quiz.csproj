@@ -5,7 +5,12 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>Iconmoon-Viva-Help.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Iconmoon-Viva-Help.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Quiz.Data\Quiz.Data.csproj" />
